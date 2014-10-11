@@ -1,0 +1,14 @@
+---
+serf_version: 1.3.7
+serf_tarball_sha256sum:
+serf_base_url: http://serf.googlecode.com/svn/src_releases/
+serf_src_parent_dir: /usr/local/src
+
+serf_tarball_filename: serf-{{ serf_version }}.tar.bz2
+serf_tarball_url: "{{ serf_base_url }}{{ serf_tarball_filename }}"
+serf_tarball_path: "{{ serf_src_parent_dir }}/{{ serf_tarball_filename }}"
+serf_src_dir: "{{ serf_src_parent_dir }}/serf-{{ serf_version }}"
+serf_prefix_dir: /usr/local/serf-{{ serf_version }}
+serf_lib_dir: "{{ serf_prefix_dir }}/lib64"
+serf_dll_filename: libserf-1.so
+serf_dll_path: "{{ serf_lib_dir }}/{{ serf_dll_filename }}"

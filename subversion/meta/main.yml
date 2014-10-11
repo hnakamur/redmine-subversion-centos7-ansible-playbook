@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: Hiroaki Nakmaura
+  description: Subversion http://subversion.apache.org/
+  license: MIT
+  min_ansible_version: 1.2
+  platforms:
+  - name: EL
+    versions:
+    - 7
+  categories:
+  - development
+dependencies:
+  - serf

@@ -1,0 +1,11 @@
+---
+subversion_version: 1.8.10
+subversion_tarball_sha256sum: 1cc900c8a7974337c3ed389dc6b5c59012ec48c7d4107ae31fd7c929ded47dcc
+subversion_mirror_url: http://ftp.kddilabs.jp/infosystems/apache/subversion/
+subversion_src_parent_dir: /usr/local/src
+
+subversion_tarball_filename: subversion-{{ subversion_version }}.tar.bz2
+subversion_tarball_url: "{{ subversion_mirror_url }}{{ subversion_tarball_filename }}"
+subversion_tarball_path: "{{ subversion_src_parent_dir }}/{{ subversion_tarball_filename }}"
+subversion_src_dir: "{{ subversion_src_parent_dir }}/subversion-{{ subversion_version }}"
+subversion_install_dir: /usr/local/subversion-{{ subversion_version }}

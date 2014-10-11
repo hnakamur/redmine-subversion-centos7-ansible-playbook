@@ -1,0 +1,26 @@
+---
+- yum: name={{ item }} state=present
+  with_items:
+    - apr-devel
+    - apr-util-devel
+    - openssl-devel
+
+- get_url: url={{ serf_tarball_url }} dest={{ serf_tarball_path }} sha256sum={{ serf_tarball_sha256sum }}
+
+# NOTE: This task failed with the error below.
+# fatal: [centos] => input file not found at /usr/local/src/serf-1.3.7.tar.bz2 or /usr/local/src/serf-1.3.7.tar.bz2
+# - unarchive: src={{ serf_tarball_path }} dest={{ serf_src_parent_dir }}
+  
+- command: tar xf {{ serf_tarball_path }} -C {{ serf_src_parent_dir }} creates={{ serf_src_dir }}
+
+- command: scons PREFIX={{ serf_prefix_dir }} LIBDIR={{ serf_lib_dir }}
+    chdir={{ serf_src_dir }} creates={{ serf_src_dir}}/{{ serf_dll_filename }}
+
+- command: scons install PREFIX={{ serf_prefix_dir }}
+    chdir={{ serf_src_dir }} creates={{ serf_dll_path }}
+
+- template: src=serf.ld.conf.j2 dest=/etc/ld.so.conf.d/serf-x86_64.conf
+  register: serf_ldconfig_file
+
+- command: ldconfig
+  when: serf_ldconfig_file.changed

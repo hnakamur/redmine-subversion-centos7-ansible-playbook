@@ -1,0 +1,7 @@
+- hosts: centos
+  gather_facts: yes
+  sudo: yes
+  roles:
+    - yum_update
+    - apache
+    - subversion

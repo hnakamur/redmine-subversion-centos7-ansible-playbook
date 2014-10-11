@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Hiroaki Nakamura
+  description: serf HTTP client library https://code.google.com/p/serf/ used by subversion
+  license: MIT
+  min_ansible_version: 1.2
+  platforms:
+  - name: EL
+    versions:
+    - 7
+  categories:
+  - development
+  - networking
+  - web
+dependencies:
+  - scons

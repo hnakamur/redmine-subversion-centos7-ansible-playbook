@@ -1,0 +1,27 @@
+---
+- yum: name={{ item }} state=present
+  with_items:
+    - gcc
+    - autoconf
+    - libtool
+    - pkgconfig
+    - httpd-devel
+    - mod_dav_svn
+    - apr-devel
+    - apr-util-devel
+    - zlib-devel
+    - sqlite-devel
+    - file-libs # libmagic
+
+- get_url: url={{ subversion_tarball_url }} dest={{ subversion_tarball_path }} sha256sum={{ subversion_tarball_sha256sum }}
+
+# NOTE: This task failed with the error below.
+# fatal: [centos] => input file not found at /usr/local/src/subversion-1.8.10.tar.bz2 or /usr/local/src/subversion-1.8.10.tar.bz2
+# - unarchive: src={{ subversion_tarball_path }} dest={{ subversion_src_parent_dir }}
+
+- command: tar xf {{ subversion_tarball_path }} -C {{ subversion_src_parent_dir }} creates={{ subversion_src_dir }}
+
+- command: ./configure
+    chdir={{ subversion_src_dir }}
+  environment:
+    PKG_CONFIG_PATH: "{{ serf_lib_dir }}/pkgconfig"

@@ -1,0 +1,8 @@
+---
+- command: rpm -q scons
+  register: scons_installed
+  failed_when: scons_installed.rc not in [0, 1]
+  changed_when: False
+
+- yum: name={{ scons_rpm_url }} state=present
+  when: scons_installed.rc == 1
