@@ -3,5 +3,6 @@
   sudo: yes
   roles:
     - yum_update
-    - apache
-    - subversion
+    - yumdownloader
+#    - apache
+#    - subversion
