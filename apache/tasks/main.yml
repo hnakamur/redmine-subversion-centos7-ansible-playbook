@@ -1,4 +1,21 @@
 ---
-- yum: name=httpd state=latest
+- yum: name={{ item }} state=present
+  with_items:
+    - gcc
+    - make
 
-- service: name=httpd state=started enabled=yes
+- get_url: url={{ apache_tarball_url }} dest={{ apache_tarball_path }} sha256sum={{ apache_tarball_sha256sum }}
+
+# NOTE: This task failed with the error below.
+# fatal: [centos] => input file not found at /usr/local/src/httpd-2.4.10.tar.bz2 or /usr/local/src/httpd-2.4.10.tar.bz2
+#- unarchive: src={{ apache_tarball_path }} dest={{ apache_src_parent_dir }}
+
+- command: tar xf {{ apache_tarball_path }} -C {{ apache_src_parent_dir }} creates={{ apache_src_dir }}
+
+- command: ./configure --prefix={{ apache_prefix_dir }}
+    chdir={{ apache_src_dir }} creates={{ apache_src_dir }}/config.status
+
+- command: make
+    chdir={{ apache_src_dir }} #creates={{ apache_src_dir }}/config.status
+
+#- service: name=httpd state=started enabled=yes

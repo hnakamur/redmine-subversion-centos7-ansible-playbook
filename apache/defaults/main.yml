@@ -1,0 +1,11 @@
+---
+apache_version: 2.4.10
+apache_tarball_sha256sum: 176c4dac1a745f07b7b91e7f4fd48f9c48049fa6f088efe758d61d9738669c6a
+apache_mirror_url: http://ftp.kddilabs.jp/infosystems/apache/
+apache_src_parent_dir: /usr/local/src
+
+apache_tarball_filename: httpd-{{ apache_version }}.tar.bz2
+apache_tarball_url: "{{ apache_mirror_url }}httpd/{{ apache_tarball_filename }}"
+apache_tarball_path: "{{ apache_src_parent_dir }}/{{ apache_tarball_filename }}"
+apache_src_dir: "{{ apache_src_parent_dir }}/httpd-{{ apache_version }}"
+apache_prefix_dir: /usr/local/apache-{{ apache_version }}
